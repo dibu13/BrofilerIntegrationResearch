@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Brofiler integration" content="Brofiler integration">
+    <meta name="Daniel Triviño Merida" content="">
+
+    <title>Brofiler Integration</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Brofiler Integration</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Daniel Triviño <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a target="_blank" href="https://github.com/dibu13"><i class="fa fa-fw fa-github"></i> GitHub </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="mailto:dibu.13@gmail.com?subject=Brofiler%20Research%20Contact"><i class="fa fa-fw fa-envelope"></i> Contact </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="index.html"><i class="fa fa-fw fa-home"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="brofiler.html"><i class="fa fa-fw fa-question-circle"></i> What is Brofiler?</a>
+                    </li>
+                    <li>
+                        <a href="profiler.html"><i class="fa fa-fw fa-database"></i> What is a profiler?</a>
+                    </li>
+                    <li class="active">
+                        <a href="implementation.html"><i class="fa fa-fw fa-code"></i> Implementation</a>
+                    </li>
+                    <li>
+                        <a href="gui.html"><i class="fa fa-fw fa-desktop"></i> GUI & Use</a>
+                    </li>
+                    <li>
+                        <a href="todos.html"><i class="fa fa-fw fa-edit"></i> To-Dos</a>
+                    </li>
+                    <li>
+                        <script type="text/javascript" src="https://counter3.fcs.ovh/private/counter.js?c=a8418wus9jx5hk9z87n61tryewkt866l"></script>
+                        <noscript><a href="https://www.freecounterstat.com" title="free hit counter for website"><img src="https://counter3.fcs.ovh/private/freecounterstat.php?c=a8418wus9jx5hk9z87n61tryewkt866l" border="0" title="free hit counter for website" alt="free hit counter for website"></a></noscript>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Implementation
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> 1. Download files</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>Download Brofiler from their <a target="_blank" href="https://github.com/bombomby/brofiler/releases">Github</a>. You should also download the brofiler.h file.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> 2. Integration</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>Add the previous files to the project.</p>
+                                <p>Include Brofiler:</p>
+                                <pre>
+#include "Brofiler.h"
+#pragma comment(lib, "Brofiler/ProfilerCore32.lib")</pre>
+                                <p>Now, for the program to capture the frames, we must tell you which is the main loop of our application, we will use the following line at the beginning of the loop (This must be done for every thread we have):</p>
+                                <pre>
+BROFILER_FRAME("frameName")</pre>
+                                <p>Once indicated the main loop, we will add the following line of code at the beginning of the functions that we want to analyze:</p>
+                                <pre>
+BROFILER_CATEGORY( "functionName", Profiler::Color::colorName )</pre>
+                                <p>FunctionName is the name that will appear in the program and colorName the color it will use to display it in the graphics. Here is a list of all the colors that can be used:</p>
+                                <div id="accordion" class="panel-group">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Colors - Click to display</a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p> <span style="color:aliceblue">AliceBlue</span>
+                                                    <span style="color:AntiqueWhite">AntiqueWhite</span>
+                                                    <span style="color:Aqua">Aqua</span>
+                                                    <span style="color:Aquamarine">Aquamarine</span>
+                                                    <span style="color:Azure">Azure</span>
+                                                    <span style="color:Beige">Beige</span>
+                                                    <span style="color:Bisque">Bisque</span>
+                                                    <span style="color:Black">Black</span>
+                                                    <span style="color:BlanchedAlmond">BlanchedAlmond</span>
+                                                    <span style="color:Blue">Blue</span>
+                                                    <span style="color:BlueViolet">BlueViolet</span>
+                                                    <span style="color:Brown">Brown</span>
+                                                    <span style="color:BurlyWood">BurlyWood</span>
+                                                    <span style="color:CadetBlue">CadetBlue</span>
+                                                    <span style="color:Chartreuse">Chartreuse</span>
+                                                    <span style="color:Chocolate">Chocolate</span>
+                                                    <span style="color:Coral">Coral</span>
+                                                    <span style="color:CornflowerBlue">CornflowerBlue</span>
+                                                    <span style="color:Cornsilk">Cornsilk</span>
+                                                    <span style="color:Crimson">Crimson</span>
+                                                    <span style="color:Cyan">Cyan</span>
+                                                    <span style="color:DarkBlue">DarkBlue</span>
+                                                    <span style="color:DarkCyan">DarkCyan</span>
+                                                    <span style="color:DarkGoldenRod">DarkGoldenRod</span>
+                                                    <span style="color:DarkGray">DarkGray</span>
+                                                    <span style="color:DarkGreen">DarkGreen</span>
+                                                    <span style="color:DarkKhaki">DarkKhaki</span>
+                                                    <span style="color:DarkMagenta">DarkMagenta</span>
+                                                    <span style="color:DarkOliveGreen">DarkOliveGreen</span>
+                                                    <span style="color:DarkOrange">DarkOrange</span>
+                                                    <span style="color:DarkOrchid">DarkOrchid</span>
+                                                    <span style="color:DarkRed">DarkRed</span>
+                                                    <span style="color:DarkSalmon">DarkSalmon</span>
+                                                    <span style="color:DarkSeaGreen">DarkSeaGreen</span>
+                                                    <span style="color:DarkSlateBlue">DarkSlateBlue</span>
+                                                    <span style="color:DarkSlateGray">DarkSlateGray</span>
+                                                    <span style="color:DarkTurquoise">DarkTurquoise</span>
+                                                    <span style="color:DarkViolet">DarkViolet</span>
+                                                    <span style="color:DeepPink">DeepPink</span>
+                                                    <span style="color:DeepSkyBlue">DeepSkyBlue</span>
+                                                    <span style="color:DimGray">DimGray</span>
+                                                    <span style="color:DodgerBlue">DodgerBlue</span>
+                                                    <span style="color:FireBrick">FireBrick</span>
+                                                    <span style="color:FloralWhite">FloralWhite</span>
+                                                    <span style="color:ForestGreen">ForestGreen</span>
+                                                    <span style="color:Fuchsia">Fuchsia</span>
+                                                    <span style="color:Gainsboro">Gainsboro</span>
+                                                    <span style="color:GhostWhite">GhostWhite</span>
+                                                    <span style="color:Gold">Gold</span>
+                                                    <span style="color:GoldenRod">GoldenRod</span>
+                                                    <span style="color:Gray">Gray</span>
+                                                    <span style="color:Green">Green</span>
+                                                    <span style="color:GreenYellow">GreenYellow</span>
+                                                    <span style="color:HoneyDew">HoneyDew</span>
+                                                    <span style="color:HotPink">HotPink</span>
+                                                    <span style="color:IndianRed">IndianRed</span>
+                                                    <span style="color:Indigo">Indigo</span>
+                                                    <span style="color:Ivory">Ivory</span>
+                                                    <span style="color:Khaki">Khaki</span>
+                                                    <span style="color:Lavender">Lavender</span>
+                                                    <span style="color:LavenderBlush">LavenderBlush</span>
+                                                    <span style="color:LawnGreen">LawnGreen</span>
+                                                    <span style="color:LemonChiffon">LemonChiffon</span>
+                                                    <span style="color:LightBlue">LightBlue</span>
+                                                    <span style="color:LightCoral">LightCoral</span>
+                                                    <span style="color:LightCyan">LightCyan</span>
+                                                    <span style="color:LightGoldenRodYellow">LightGoldenRodYellow</span>
+                                                    <span style="color:LightGray">LightGray</span>
+                                                    <span style="color:LightGreen">LightGreen</span>
+                                                    <span style="color:LightPink">LightPink</span>
+                                                    <span style="color:LightSalmon">LightSalmon</span>
+                                                    <span style="color:LightSeaGreen">LightSeaGreen</span>
+                                                    <span style="color:LightSkyBlue">LightSkyBlue</span>
+                                                    <span style="color:LightSlateGray">LightSlateGray</span>
+                                                    <span style="color:LightSteelBlue">LightSteelBlue</span>
+                                                    <span style="color:LightYellow">LightYellow</span>
+                                                    <span style="color:Lime">Lime</span>
+                                                    <span style="color:LimeGreen">LimeGreen</span>
+                                                    <span style="color:Linen">Linen</span>
+                                                    <span style="color:Magenta">Magenta</span>
+                                                    <span style="color:Maroon">Maroon</span>
+                                                    <span style="color:MediumAquaMarine">MediumAquaMarine</span>
+                                                    <span style="color:MediumBlue">MediumBlue</span>
+                                                    <span style="color:MediumOrchid">MediumOrchid</span>
+                                                    <span style="color:MediumPurple">MediumPurple</span>
+                                                    <span style="color:MediumSeaGreen">MediumSeaGreen</span>
+                                                    <span style="color:MediumSlateBlue">MediumSlateBlue</span>
+                                                    <span style="color:MediumSpringGreen">MediumSpringGreen</span>
+                                                    <span style="color:MediumTurquoise">MediumTurquoise</span>
+                                                    <span style="color:MediumVioletRed">MediumVioletRed</span>
+                                                    <span style="color:MidnightBlue">MidnightBlue</span>
+                                                    <span style="color:MintCream">MintCream</span>
+                                                    <span style="color:MistyRose">MistyRose</span>
+                                                    <span style="color:Moccasin">Moccasin</span>
+                                                    <span style="color:NavajoWhite">NavajoWhite</span>
+                                                    <span style="color:Navy">Navy</span>
+                                                    <span style="color:OldLace">OldLace</span>
+                                                    <span style="color:Olive">Olive</span>
+                                                    <span style="color:OliveDrab">OliveDrab</span>
+                                                    <span style="color:Orange">Orange</span>
+                                                    <span style="color:OrangeRed">OrangeRed</span>
+                                                    <span style="color:Orchid">Orchid</span>
+                                                    <span style="color:PaleGoldenRod">PaleGoldenRod</span>
+                                                    <span style="color:PaleGreen">PaleGreen</span>
+                                                    <span style="color:PaleTurquoise">PaleTurquoise</span>
+                                                    <span style="color:PaleVioletRed">PaleVioletRed</span>
+                                                    <span style="color:PapayaWhip">PapayaWhip</span>
+                                                    <span style="color:PeachPuff">PeachPuff</span>
+                                                    <span style="color:Peru">Peru</span>
+                                                    <span style="color:Pink">Pink</span>
+                                                    <span style="color:Plum">Plum</span>
+                                                    <span style="color:PowderBlue">PowderBlue</span>
+                                                    <span style="color:Purple">Purple</span>
+                                                    <span style="color:Red">Red</span>
+                                                    <span style="color:RosyBrown">RosyBrown</span>
+                                                    <span style="color:RoyalBlue">RoyalBlue</span>
+                                                    <span style="color:SaddleBrown">SaddleBrown</span>
+                                                    <span style="color:Salmon">Salmon</span>
+                                                    <span style="color:SandyBrown">SandyBrown</span>
+                                                    <span style="color:SeaGreen">SeaGreen</span>
+                                                    <span style="color:SeaShell">SeaShell</span>
+                                                    <span style="color:Sienna">Sienna</span>
+                                                    <span style="color:Silver">Silver</span>
+                                                    <span style="color:SkyBlue">SkyBlue</span>
+                                                    <span style="color:SlateBlue">SlateBlue</span>
+                                                    <span style="color:SlateGray">SlateGray</span>
+                                                    <span style="color:Snow">Snow</span>
+                                                    <span style="color:SteelBlue">SteelBlue</span>
+                                                    <span style="color:Tan">Tan</span>
+                                                    <span style="color:Teal">Teal</span>
+                                                    <span style="color:Thistle">Thistle</span>
+                                                    <span style="color:Tomato">Tomato</span>
+                                                    <span style="color:Turquoise">Turquoise</span>
+                                                    <span style="color:Violet">Violet</span>
+                                                    <span style="color:Wheat">Wheat</span>
+                                                    <span style="color:White">White</span>
+                                                    <span style="color:WhiteSmoke">WhiteSmoke</span>
+                                                    <span style="color:Yellow">Yellow</span>
+                                                    <span style="color:YellowGreen">YellowGreen</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+</body>
+
+</html>
